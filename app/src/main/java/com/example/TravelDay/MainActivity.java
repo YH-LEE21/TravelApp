@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Intent intent;
-                if(tab.getPosition() == 0) intent = new Intent(MainActivity.this,CalendarActivity.class);
                 viewPager.setCurrentItem(tab.getPosition());
 
             }
