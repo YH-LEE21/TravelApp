@@ -7,16 +7,13 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-
 public class AddActivity extends AppCompatActivity {
+
     CalendarView calendarView;
     EditText editText;
     Button  btnDone,btnNo;
