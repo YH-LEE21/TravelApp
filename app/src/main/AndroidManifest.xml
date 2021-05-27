@@ -1,60 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.example.TravelDay">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.TravelDay">
 
-<uses-permission android:name="android.permission.INTERNET" /><!-- 인터넷 사용 허용-->
-
-
-    <permission android:name="com.example.TravelDay.permission.MAPS_RECEIVE"
-    android:protectionLevel="signature"/>                                           <!--GoogleMap-->
-
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 사용 허용 -->
+    <permission
+        android:name="com.example.TravelDay.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" /> <!-- GoogleMap -->
     <uses-permission android:name="com.example.my38_locationmap.permission.MAPS_RECEIVE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="READ_GSERVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <uses-feature android:glEsVersion="0x00020000"
-        android:required="true"/>
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="TravelDay"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/Theme.Design.Light.NoActionBar"
-    android:usesCleartextTraffic="true">
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="TravelDay"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Design.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
 
-        <uses-library android:name="com.google.android.maps"/>
-        <uses-library android:name="org.apache.http.legacy"
-            android:required="false"/>
+        <uses-library android:name="com.google.android.maps" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDvvEnIEUhs7Wa3XGaJqNrjWNi-UFM96qw"/>
-
+            android:value="AIzaSyDvvEnIEUhs7Wa3XGaJqNrjWNi-UFM96qw" />
         <meta-data
             android:name="com.google.android.gms.vision"
-            android:value="12211000"/>                                                  <!--GoogleMap-->
-    <activity android:name="com.example.TravelDay.MainActivity"
-        android:theme="@style/Theme.Design.Light">
+            android:value="12211000" /> <!-- GoogleMap -->
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Design.Light"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    </activity>
-    <activity android:name="com.example.TravelDay.SplashActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    <activity android:name="com.example.TravelDay.LoginActivity">
-
-    </activity>
-
-    <activity android:name="com.example.TravelDay.RegisterActivity">
-
-    </activity>
-</application>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".AddActivity"></activity>
+    </application>
 
 </manifest>
-
