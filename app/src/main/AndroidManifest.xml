@@ -36,24 +36,24 @@ package="com.example.TravelDay">
         <meta-data
             android:name="com.google.android.gms.vision"
             android:value="12211000"/>                                                  <!--GoogleMap-->
-    <activity android:name="com.example.TravelDay.MainActivity"
-        android:theme="@style/Theme.Design.Light">
-
-    </activity>
-    <activity android:name="com.example.TravelDay.SplashActivity">
+        <activity
+        android:name=".MainActivity"
+        android:theme="@style/Theme.Design.Light"></activity>
+    <activity android:name=".SplashActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-    <activity android:name="com.example.TravelDay.LoginActivity">
+    <activity android:name=".LoginActivity">
 
     </activity>
 
-    <activity android:name="com.example.TravelDay.RegisterActivity">
+    <activity android:name=".RegisterActivity">
 
     </activity>
+        <activity android:name=".AddActivity"></activity>
 </application>
 
 </manifest>
