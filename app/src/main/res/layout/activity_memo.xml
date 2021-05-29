@@ -24,7 +24,7 @@
         android:id="@+id/editMemo"
         android:hint="할 일을 적어주세요"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:visibility="invisible"
         android:layout_below="@id/diaryDate"/>
     <LinearLayout

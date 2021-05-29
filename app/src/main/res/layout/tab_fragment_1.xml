@@ -11,19 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="0sp"
         android:layout_weight="1"
-        android:background="#CCCCCC"
+        android:background="@color/white"
         android:fillViewport="true"
         >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            />
     </ScrollView>
     <Button
 
         android:id="@+id/btnAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="add"
+        android:text="일정 추가"
+        android:textColor="@color/white"
+        android:background="@color/MainColor"
         />
 </LinearLayout>

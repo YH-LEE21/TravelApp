@@ -1,5 +1,6 @@
 package com.example.TravelDay;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
@@ -10,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,7 +33,7 @@ public class TabFragment1 extends Fragment {
     @Nullable
     @Override
     public  View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=  (ViewGroup) inflater.inflate(R.layout.tab_fragment_1, container,false);
+        View view=  (View)inflater.inflate(R.layout.tab_fragment_1, container,false);
 
 
 
@@ -64,18 +67,18 @@ public class TabFragment1 extends Fragment {
             String strMain = data.getStringExtra("main");
             String strSub = data.getStringExtra("sub");
 
-            Memo memo = new Memo(strMain,strSub,0);
+            Memo memo = new Memo(strMain,strSub);
 
             recyclerAdapter.addItem(memo);
             recyclerAdapter.notifyDataSetChanged();
         }
 
+
     }
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
         private List<Memo> listdate;
-
-        public RecyclerAdapter(List<Memo> listdate){
+        public RecyclerAdapter( List<Memo> listdate){
             this.listdate=listdate;
         }
 
@@ -100,12 +103,6 @@ public class TabFragment1 extends Fragment {
             holder.mainText.setText(memo.getMaintext());
             holder.subText.setText(memo.getSubText());
 
-            if(memo.getIsdone() == 0){
-                holder.img.setBackgroundColor(Color.LTGRAY);
-            }
-            else{
-                holder.img.setBackgroundColor(Color.GREEN);
-            }
         }
 
         void addItem(Memo memo){
@@ -120,19 +117,13 @@ public class TabFragment1 extends Fragment {
 
             private TextView mainText;
             private TextView subText;
-            private ImageView img;
 
 
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
-
                 mainText = itemView.findViewById(R.id.item_maintext);
                 subText = itemView.findViewById(R.id.item_subtext);
-                img = itemView.findViewById(R.id.item_image);
-
             }
-
-
         }
     }
 

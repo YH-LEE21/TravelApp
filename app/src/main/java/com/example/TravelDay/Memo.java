@@ -3,11 +3,9 @@ package com.example.TravelDay;
 public class Memo {
     String maintext;//메모
     String subText;//날짜
-    int  isdone; //완료여부
-    public Memo(String maintext, String subText, int isdone){
+    public Memo(String maintext, String subText){
         this.maintext = maintext;
         this.subText = subText;
-        this.isdone = isdone;
     }
 
     public String getMaintext(){
@@ -17,9 +15,6 @@ public class Memo {
         return subText;
     }
 
-    public int getIsdone() {
-        return isdone;
-    }
     public void setMaintext(String maintext){
         this.maintext=maintext;
     }
@@ -28,7 +23,4 @@ public class Memo {
         this.subText = subText;
     }
 
-    public void setIsdone(int isdone) {
-        this.isdone = isdone;
-    }
 }
