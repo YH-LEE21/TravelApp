@@ -1,6 +1,8 @@
 package com.example.TravelDay;
 
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -72,13 +74,20 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.log_out:
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Toast.makeText(this,"로그아웃",Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 return true;
             case R.id.user_helper:
                 Toast.makeText(this, "고객지원", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.user_peedback:
-                Toast.makeText(this, "피드백", Toast.LENGTH_SHORT).show();
+                String id = "ksmwy9029@naver.com";
+
+                ClipboardManager clipboardManager =(ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData =ClipData.newPlainText("adress",id);
+                clipboardManager.setPrimaryClip(clipData);
+
+                Toast.makeText(this,"이메일 복사가 완료되었습니다.",Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return false;
