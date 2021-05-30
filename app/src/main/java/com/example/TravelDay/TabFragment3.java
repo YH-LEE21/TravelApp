@@ -9,10 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.maps.OnMapReadyCallback;
+
 public class TabFragment3 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_fragment_3, container, false);
+        View view = inflater.inflate(R.layout.tab_fragment_3, container, false);
+
+        return view;
     }
 }

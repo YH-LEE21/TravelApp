@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabFragment1 extends Fragment {
-    RecyclerView recyclerView;
+    RecyclerView recyclerView1;
     RecyclerAdapter recyclerAdapter;
     RecyclerView.LayoutManager mLayoutManger;
     List<Memo> memoList;
@@ -40,12 +40,12 @@ public class TabFragment1 extends Fragment {
         Button btnAdd = view.findViewById(R.id.btnAdd);
         memoList = new ArrayList<Memo>();
 
-        recyclerView = view.findViewById(R.id.recyclerview);
+        recyclerView1 = view.findViewById(R.id.recyclerview1);
         mLayoutManger = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManger);
+        recyclerView1.setLayoutManager(mLayoutManger);
 
         recyclerAdapter = new RecyclerAdapter(memoList);
-        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView1.setAdapter(recyclerAdapter);
 
         btnAdd.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -87,7 +87,7 @@ public class TabFragment1 extends Fragment {
         @NonNull
         @Override
         public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item1,parent,false);
             return new ItemViewHolder(view);
         }
 

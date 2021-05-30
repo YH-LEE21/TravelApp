@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:fillViewport="true"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </ScrollView>
+    <Button
+
+        android:id="@+id/btnCalc"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="두번째화면"
-        android:layout_centerInParent="true"
+        android:text="경비계산"
+        android:textColor="@color/white"
+        android:background="@color/MainColor"
         />
-</RelativeLayout>
+</LinearLayout>

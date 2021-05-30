@@ -15,31 +15,31 @@ public class AddActivity extends AppCompatActivity {
 
     CalendarView calendarView;
     EditText editText;
-    Button  btnDone,btnNo;
+    Button  btnDone1,btnNo1;
     TextView diaryDate;
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memo);
 
-        calendarView = findViewById(R.id.calendarview);
+        calendarView = findViewById(R.id.calendarview1);
         diaryDate = findViewById(R.id.diaryDate);
         editText = findViewById(R.id.editMemo);
-        btnDone = findViewById(R.id.btnDone);
-        btnNo = findViewById(R.id.btnNo);
+        btnDone1 = findViewById(R.id.btnDone1);
+        btnNo1 = findViewById(R.id.btnNo1);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 diaryDate.setVisibility(View.VISIBLE);
                 editText.setVisibility(View.VISIBLE);
-                btnDone.setVisibility(View.VISIBLE);
-                btnNo.setVisibility(View.VISIBLE);
+                btnDone1.setVisibility(View.VISIBLE);
+                btnNo1.setVisibility(View.VISIBLE);
                 diaryDate.setText(String.format("%d/%d/%d",year,month+1,dayOfMonth));
             }
         });
 
-        btnDone.setOnClickListener(new View.OnClickListener() {
+        btnDone1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String str = editText.getText().toString();
@@ -55,7 +55,7 @@ public class AddActivity extends AppCompatActivity {
                 }
             }
         });
-        btnNo.setOnClickListener(new View.OnClickListener() {
+        btnNo1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
