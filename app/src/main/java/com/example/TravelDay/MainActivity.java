@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("일정 메모"));
         tabLayout.addTab(tabLayout.newTab().setText("경비 계산"));
-        tabLayout.addTab(tabLayout.newTab().setText("구글 맵"));
+        tabLayout.addTab(tabLayout.newTab().setText("네이버 지도"));
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
