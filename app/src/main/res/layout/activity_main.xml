@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:background="#80ff000f"
         app:tabTextColor="@color/white"
-        android:layout_below="@id/toolbar"
         />
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
