@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.user_helper:
-                Toast.makeText(this, "고객지원", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(MainActivity.this,DeveloperSupport.class);
+                startActivity(intent1);
                 return true;
             case R.id.user_peedback:
                 String id = "ksmwy9029@naver.com";

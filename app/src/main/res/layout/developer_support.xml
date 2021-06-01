@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    >
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TravelDay"
+        android:textColor="@color/MainColor"
+        android:textSize="50dp"
+        android:layout_marginBottom="20dp"
+        android:textStyle="bold"
+         />
+    <TextView
+        android:id="@+id/Consumer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/MainColor"
+        android:text="FROM 고객님"
+        android:textSize="20dp"
+        android:layout_below="@id/textView5"
+        />
+
+    <TextView
+        android:id="@+id/travelDaySupportTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Consumer"
+        android:layout_marginVertical="50sp"
+        android:autoSizeTextType="none"
+        android:text="안녕하세요. 저희 TravelDay를 아껴주는 여러분 감사합니다.
+이 앱을 사용하시는 모든 분들이 불편함 없이 사용해 주시면 감사하겠습니다.
+만약 불편함이 있다면 피드백 보내기를 통해 개발자에게 메일을 보내주시면 개발자가 확인해보고 버그가 있다면
+작은 보상을 해드리겠습니다."
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="To 개발자일동 "
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/MainColor"
+        android:layout_below="@id/travelDaySupportTeam"
+        />
+</RelativeLayout>

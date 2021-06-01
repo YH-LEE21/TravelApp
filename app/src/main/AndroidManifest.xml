@@ -48,6 +48,8 @@ package="com.example.TravelDay">
     <activity android:name=".RegisterActivity">
 
     </activity>
+        <activity android:name=".DeveloperSupport"></activity>
+
         <activity android:name=".AddActivity"></activity><!--일정 추가 -->
 
         <activity android:name=".CalcActivity"></activity><!--경비 계산-->
