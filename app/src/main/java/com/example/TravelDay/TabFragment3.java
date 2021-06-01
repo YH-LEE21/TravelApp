@@ -131,11 +131,15 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback, Overla
         //위치 및 각도 조정
         CameraPosition cameraPosition = new CameraPosition(
           new LatLng(33.38,126.88), //시작 위치 지정 제주도로 고정했음
-                9,                              //줌 레벨
+                17,                              //줌 레벨
                 0,                             //기울기 각도
                 0                              //방향
         );
         mNaverMap.setCameraPosition(cameraPosition);
+
+        //시작위치
+        mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+
 
         Geocoder geocoder = new Geocoder(getContext());
 
@@ -160,6 +164,7 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback, Overla
 
                 //좌표(위도,경도)생성
                 LatLng point = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
+
 
                 InfoWindow infoWindow = new InfoWindow();
                 infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(getContext()) {
