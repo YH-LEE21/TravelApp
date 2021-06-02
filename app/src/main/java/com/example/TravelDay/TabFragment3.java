@@ -99,7 +99,7 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback, Overla
     @Override
     public void onMapReady(NaverMap naverMap) {
         Log.d(TAG,"onMapReady");
-
+        Geocoder geocoder = new Geocoder(getContext());
 
         //NaverMap 객체 받아서 Naver 객체에 위치 소스 지정
         mNaverMap = naverMap;
@@ -128,20 +128,12 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback, Overla
         //건물 표시
         mNaverMap.setLayerGroupEnabled(naverMap.LAYER_GROUP_BUILDING,true);
 
-        //위치 및 각도 조정
-        CameraPosition cameraPosition = new CameraPosition(
-          new LatLng(33.38,126.88), //시작 위치 지정 제주도로 고정했음
-                17,                              //줌 레벨
-                0,                             //기울기 각도
-                0                              //방향
-        );
-        mNaverMap.setCameraPosition(cameraPosition);
+
 
         //시작위치
         mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
 
-        Geocoder geocoder = new Geocoder(getContext());
 
         button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -213,6 +205,9 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback, Overla
         });
     }
 
+
+
+    //권한 승인
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -225,26 +220,11 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback, Overla
         }
     }
 
-    //마커 정보 저장시킬 변수들 선언
-    private Vector<LatLng> markersPosition;
-    private Vector<Marker> activeMarkers;
 
     //현재 카메라가 보고있는 위치
     public LatLng getCurrentPosition(NaverMap naverMap){
         CameraPosition cameraPosition = naverMap.getCameraPosition();
         return new LatLng(cameraPosition.target.latitude,cameraPosition.target.longitude);
-    }
-
-    //지도상에 표시되고 있는 마커들 지도에서 삭제
-    private  void freeActiveMarkers(){
-        if(activeMarkers == null){
-            activeMarkers = new Vector<Marker>();
-            return;
-        }
-        for(Marker activeMarker:activeMarkers){
-            activeMarker.setMap(null);
-        }
-        activeMarkers = new Vector<Marker>();
     }
 
     @Override
