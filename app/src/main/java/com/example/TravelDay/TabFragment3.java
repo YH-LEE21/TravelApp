@@ -35,6 +35,7 @@ import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
+import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 
@@ -61,6 +62,9 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback, Overla
     //지도 객체 변수
     private MapView mapView;
     private NaverMap mNaverMap;
+
+
+    private PathOverlay path;//단일경로
 
     EditText editText;//지도 입력
     Button button;//입력받은 위치 찾기 버튼
@@ -198,7 +202,6 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback, Overla
                CameraUpdate cameraUpdate = CameraUpdate.scrollTo(point);
                mNaverMap.moveCamera(cameraUpdate);
 
-
                //건물 내부 보기
                mNaverMap.setIndoorEnabled(true);
             }
@@ -281,4 +284,5 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback, Overla
         }
         return false;
     }
+
 }

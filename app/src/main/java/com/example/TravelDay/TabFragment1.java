@@ -47,6 +47,8 @@ public class TabFragment1 extends Fragment {
         recyclerAdapter = new RecyclerAdapter(memoList);
         recyclerView1.setAdapter(recyclerAdapter);
 
+
+
         btnAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -62,7 +64,7 @@ public class TabFragment1 extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        if(resultCode == 1) requestCode = 1;
         if(requestCode == 0){
             String strMain = data.getStringExtra("main");
             String strSub = data.getStringExtra("sub");

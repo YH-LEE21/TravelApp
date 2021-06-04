@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CalcActivity extends AppCompatActivity {
@@ -57,6 +58,16 @@ public class CalcActivity extends AppCompatActivity {
         btnDone2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (editHome.getText().toString().equals("") || editfood.getText().toString().equals("") || editTraffic.getText().toString().equals("") ||
+                        editTravel1.getText().toString().equals("") ||editShopping.getText().toString().equals("")||editetc.getText().toString().equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CalcActivity.this);
+                    AlertDialog dialog = builder.setMessage("모두 공백없이 입력해주세요.").setNegativeButton("확인", null).create();
+                    dialog.show();
+                    return;
+                }
+
+
                 int[] a = {Integer.parseInt(editHome.getText().toString()),Integer.parseInt(editfood.getText().toString()),
                         Integer.parseInt(editTraffic.getText().toString()),Integer.parseInt(editetc.getText().toString()),
                         Integer.parseInt(editTravel1.getText().toString()),Integer.parseInt(editShopping.getText().toString())};
@@ -77,6 +88,8 @@ public class CalcActivity extends AppCompatActivity {
         btnNo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                setResult(1,intent);
                 finish();
             }
         });

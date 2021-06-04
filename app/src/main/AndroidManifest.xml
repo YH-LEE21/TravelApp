@@ -54,7 +54,7 @@ package="com.example.TravelDay">
 
         <activity android:name=".CalcActivity"></activity><!--경비 계산-->
 
-</application>
+    </application>
 
 </manifest>
 

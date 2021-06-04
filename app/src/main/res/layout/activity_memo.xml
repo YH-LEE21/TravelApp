@@ -40,6 +40,8 @@ tools:context=".Memo">
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@color/MainColor"
+        android:textColor="@color/white"
         android:visibility="invisible"
         android:text="cancel"
         />
@@ -49,6 +51,8 @@ tools:context=".Memo">
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@color/MainColor"
+        android:textColor="@color/white"
         android:visibility="invisible"
         android:text="done"
         />

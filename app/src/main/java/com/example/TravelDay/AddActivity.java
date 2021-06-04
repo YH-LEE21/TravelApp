@@ -50,7 +50,6 @@ public class AddActivity extends AppCompatActivity {
                     intent.putExtra("main",str);
                     intent.putExtra("sub",substr);
                     setResult(0,intent);
-
                     finish();
                 }
             }
@@ -58,7 +57,8 @@ public class AddActivity extends AppCompatActivity {
         btnNo1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent();
+                setResult(1,intent);
                 finish();
             }
         });

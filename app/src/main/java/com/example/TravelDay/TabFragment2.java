@@ -51,6 +51,7 @@ public class TabFragment2 extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 1) requestCode = 1;
 
         if(requestCode == 0){
             String strMain = data.getStringExtra("Calc");
