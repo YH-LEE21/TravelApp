@@ -3,6 +3,7 @@ package com.example.TravelDay;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import java.util.List;
 
 public class TabFragment2 extends Fragment {
 
+
+    SQLiteHelper2 dbHelper;
     RecyclerView recyclerView2;
     RecyclerAdapter recyclerAdapter2;
     RecyclerView.LayoutManager yLayoutManger;
@@ -35,7 +38,10 @@ public class TabFragment2 extends Fragment {
 
         Button  btnCalc = view.findViewById(R.id.btnCalc);
 
+        dbHelper = new SQLiteHelper2(getContext());
+
         calcList = new ArrayList<Calc>();
+        calcList = dbHelper.selectAll();//db에 정보 저장
         recyclerView2 = view.findViewById(R.id.recyclerview2);
         yLayoutManger = new LinearLayoutManager(getActivity());
         recyclerView2.setLayoutManager(yLayoutManger);
@@ -65,18 +71,21 @@ public class TabFragment2 extends Fragment {
             calc = new Calc(strMain,strSub);
 
             recyclerAdapter2.addItem(calc);
+            dbHelper.insertCalc(calc);//db정보 추가
             recyclerAdapter2.notifyDataSetChanged();
+
         }
         else if(requestCode == 2){
             String strMain = data.getStringExtra("Calc");
             String strSub = data.getStringExtra("sub");
-
             calc = new Calc(strMain,strSub);
             recyclerAdapter2.setItem(setPos,calc);
             recyclerAdapter2.notifyDataSetChanged();
+            dbHelper.updateCalc(calc,setPos);
         }
 
     }
+
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
         private List<Calc> listdate;
@@ -96,6 +105,8 @@ public class TabFragment2 extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
             Calc calc = listdate.get(position);
+
+            holder.calcText.setTag(calc.getSeq());
 
             holder.calcText.setText(calc.getMainCalc());
             holder.subText.setText(calc.getSubText());
@@ -131,8 +142,9 @@ public class TabFragment2 extends Fragment {
                         setPos = getAdapterPosition() ;
                         if (setPos != RecyclerView.NO_POSITION) {
                             Intent intent = new Intent(getContext(),CalcActivity.class);
-                            Toast.makeText(getContext(),"메모 수정",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"경비 수정",Toast.LENGTH_SHORT).show();
                             startActivityForResult(intent,2);
+                            notifyDataSetChanged();
                         }
                     }
                 });
@@ -140,14 +152,16 @@ public class TabFragment2 extends Fragment {
                     @Override
                     public boolean onLongClick(View v) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        int pos = getAdapterPosition();
+                        int setPos = getAdapterPosition();
                         builder.setTitle("삭제");
                         builder.setMessage("해당 항목을 삭제하시겠습니까?");
                         builder.setPositiveButton("예",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        remove(pos);
+                                        dbHelper.deleteCalc(setPos);
+                                        remove(setPos);
                                         recyclerView2.setAdapter(recyclerAdapter2);
+                                        notifyDataSetChanged();
                                         Toast.makeText(getContext(),"삭제 완료",Toast.LENGTH_SHORT).show();
                                     }
                                 });

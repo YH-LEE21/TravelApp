@@ -2,8 +2,15 @@ package com.example.TravelDay;
 
 public class Calc {
 
+        int seq;
         String mainCalc;//
         String subText;//날짜
+
+        public Calc(int seq,String mainCalc,String subText){
+            this.seq = seq;
+            this.mainCalc = mainCalc;
+            this.subText = subText;
+        }
         public Calc(String mainCalc, String subText){
             this.mainCalc = mainCalc;
             this.subText = subText;
@@ -24,4 +31,11 @@ public class Calc {
             this.subText = subText;
         }
 
-    }
+        public int getSeq() {
+            return seq;
+        }
+
+        public void setSeq(int seq) {
+            this.seq = seq;
+        }
+}
