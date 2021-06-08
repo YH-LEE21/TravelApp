@@ -153,12 +153,13 @@ public class TabFragment2 extends Fragment {
                     public boolean onLongClick(View v) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         int setPos = getAdapterPosition();
+                        int seq = (int)calcText.getTag();
                         builder.setTitle("삭제");
                         builder.setMessage("해당 항목을 삭제하시겠습니까?");
                         builder.setPositiveButton("예",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        dbHelper.deleteCalc(setPos);
+                                        dbHelper.deleteCalc(seq);
                                         remove(setPos);
                                         recyclerView2.setAdapter(recyclerAdapter2);
                                         notifyDataSetChanged();

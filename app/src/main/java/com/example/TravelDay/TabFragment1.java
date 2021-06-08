@@ -30,7 +30,6 @@ public class TabFragment1 extends Fragment {
     List<Memo> memoList;
     Memo memo;
     int setPos;
-    int seq;
     @Nullable
     @Override
     public  View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,6 +82,7 @@ public class TabFragment1 extends Fragment {
                 String strMain = data.getStringExtra("main");
                 String strSub = data.getStringExtra("sub");
                 memo = new Memo(strMain, strSub);
+
                 recyclerAdapter.setItem(setPos, memo);
                 recyclerAdapter.notifyDataSetChanged();
 
@@ -149,8 +149,11 @@ public class TabFragment1 extends Fragment {
                     @Override
                     public void onClick(View v) {
                         setPos = getAdapterPosition() ;
+                        int seq = (int)mainText.getTag();
                         if (setPos != RecyclerView.NO_POSITION) {
+
                             Intent intent = new Intent(getContext(),AddActivity.class);
+                            intent.putExtra("seq1",seq);
                             Toast.makeText(getContext(),"메모 수정",Toast.LENGTH_SHORT).show();
                             startActivityForResult(intent,2);
                         }
@@ -162,12 +165,13 @@ public class TabFragment1 extends Fragment {
                     public boolean onLongClick(View v) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         setPos = getAdapterPosition();
+                        int seq = (int)mainText.getTag();
                         builder.setTitle("삭제");
                         builder.setMessage("해당 항목을 삭제하시겠습니까?");
                         builder.setPositiveButton("예",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        dbHelper.deleteMemo(setPos);
+                                        dbHelper.deleteMemo(seq);
                                         remove(setPos);
                                         notifyDataSetChanged();
                                         Toast.makeText(getContext(),"삭제 완료",Toast.LENGTH_SHORT).show();
