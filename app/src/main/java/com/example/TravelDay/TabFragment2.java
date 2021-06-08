@@ -1,5 +1,7 @@
 package com.example.TravelDay;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -87,6 +89,29 @@ public class TabFragment2 extends Fragment {
 
             holder.calcText.setText(calc.getMainCalc());
             holder.subText.setText(calc.getSubText());
+
+            holder.calcText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("삭제");
+                    builder.setMessage("해당 항목을 삭제하시겠습니까?");
+                    builder.setPositiveButton("예",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    calcList.remove(position);
+                                    recyclerView2.setAdapter(recyclerAdapter2);
+                                }
+                            });
+                    builder.setNegativeButton("아니오",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    builder.show();
+                }
+            });
         }
 
         @Override
