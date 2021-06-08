@@ -19,11 +19,18 @@ public class CalcActivity extends AppCompatActivity {
     Button btnDone2,btnNo2;
     TextView diaryDate2;
 
+    int request=2;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        request = requestCode;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc);
-
         calendarView2 = findViewById(R.id.calendarview2);
         diaryDate2 = findViewById(R.id.diaryDate2);
         editHome = findViewById(R.id.editHome);
@@ -35,6 +42,8 @@ public class CalcActivity extends AppCompatActivity {
 
         btnDone2 = findViewById(R.id.btnDone2);
         btnNo2 = findViewById(R.id.btnNo2);
+
+
 
         calendarView2.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -53,8 +62,6 @@ public class CalcActivity extends AppCompatActivity {
             }
         });
 
-
-
         btnDone2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +73,6 @@ public class CalcActivity extends AppCompatActivity {
                     dialog.show();
                     return;
                 }
-
 
                 int[] a = {Integer.parseInt(editHome.getText().toString()),Integer.parseInt(editfood.getText().toString()),
                         Integer.parseInt(editTraffic.getText().toString()),Integer.parseInt(editetc.getText().toString()),
@@ -80,8 +86,7 @@ public class CalcActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.putExtra("Calc",mainstr);
                     intent.putExtra("sub",substr);
-                    setResult(0,intent);
-
+                    setResult(request,intent);
                     finish();
                 }
         });

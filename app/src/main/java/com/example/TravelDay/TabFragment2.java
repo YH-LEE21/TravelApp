@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ public class TabFragment2 extends Fragment {
     RecyclerAdapter recyclerAdapter2;
     RecyclerView.LayoutManager yLayoutManger;
     List<Calc> calcList;
+    Calc calc;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,12 +61,19 @@ public class TabFragment2 extends Fragment {
             String strMain = data.getStringExtra("Calc");
             String strSub = data.getStringExtra("sub");
 
-            Calc calc = new Calc(strMain,strSub);
+            calc = new Calc(strMain,strSub);
 
             recyclerAdapter2.addItem(calc);
             recyclerAdapter2.notifyDataSetChanged();
         }
+        else if(requestCode == 2){
+            String strMain = data.getStringExtra("Calc");
+            String strSub = data.getStringExtra("sub");
 
+            calc = new Calc(strMain,strSub);
+
+
+        }
 
     }
 
@@ -89,37 +98,12 @@ public class TabFragment2 extends Fragment {
 
             holder.calcText.setText(calc.getMainCalc());
             holder.subText.setText(calc.getSubText());
-
-            holder.calcText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle("삭제");
-                    builder.setMessage("해당 항목을 삭제하시겠습니까?");
-                    builder.setPositiveButton("예",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    calcList.remove(position);
-                                    recyclerView2.setAdapter(recyclerAdapter2);
-                                }
-                            });
-                    builder.setNegativeButton("아니오",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                    builder.show();
-                }
-            });
         }
 
         @Override
         public int getItemCount() {
             return listdate.size();
         }
-
-
 
         void addItem(Calc calc){
             listdate.add(calc);
@@ -138,6 +122,40 @@ public class TabFragment2 extends Fragment {
                 calcText = itemView.findViewById(R.id.item_calcMain);
                 subText = itemView.findViewById(R.id.item_subtext);
 
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = getAdapterPosition() ;
+                        if (pos != RecyclerView.NO_POSITION) {
+                            Intent intent = new Intent(getContext(),CalcActivity.class);
+                            startActivityForResult(intent,2);
+                        }
+                    }
+                });
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        int pos = getAdapterPosition();
+                        builder.setTitle("삭제");
+                        builder.setMessage("해당 항목을 삭제하시겠습니까?");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        calcList.remove(pos);
+                                        recyclerView2.setAdapter(recyclerAdapter2);
+                                    }
+                                });
+                        builder.setNegativeButton("아니오",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        builder.show();
+                        return true;
+                    }
+                });
             }
         }
     }

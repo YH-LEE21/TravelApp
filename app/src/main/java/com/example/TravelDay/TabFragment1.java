@@ -106,29 +106,6 @@ public class TabFragment1 extends Fragment {
 
             holder.mainText.setText(memo.getMaintext());
             holder.subText.setText(memo.getSubText());
-
-            holder.mainText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle("삭제");
-                    builder.setMessage("해당 항목을 삭제하시겠습니까?");
-                    builder.setPositiveButton("예",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    memoList.remove(position);
-                                    recyclerView1.setAdapter(recyclerAdapter);
-                                }
-                            });
-                    builder.setNegativeButton("아니오",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                    builder.show();
-                }
-            });
         }
 
         void addItem(Memo memo){
@@ -149,6 +126,30 @@ public class TabFragment1 extends Fragment {
                 super(itemView);
                 mainText = itemView.findViewById(R.id.item_maintext);
                 subText = itemView.findViewById(R.id.item_subtext);
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        int pos = getAdapterPosition();
+                        builder.setTitle("삭제");
+                        builder.setMessage("해당 항목을 삭제하시겠습니까?");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        memoList.remove(pos);
+                                        recyclerView1.setAdapter(recyclerAdapter);
+                                    }
+                                });
+                        builder.setNegativeButton("아니오",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        builder.show();
+                        return true;
+                    }
+                });
             }
         }
     }
