@@ -27,6 +27,7 @@ public class TabFragment2 extends Fragment {
     RecyclerView.LayoutManager yLayoutManger;
     List<Calc> calcList;
     Calc calc;
+    int setPos;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,8 +72,8 @@ public class TabFragment2 extends Fragment {
             String strSub = data.getStringExtra("sub");
 
             calc = new Calc(strMain,strSub);
-
-
+            recyclerAdapter2.setItem(setPos,calc);
+            recyclerAdapter2.notifyDataSetChanged();
         }
 
     }
@@ -113,6 +114,8 @@ public class TabFragment2 extends Fragment {
             listdate.remove(position);
         }
 
+        void setItem(int position,Calc calc){ listdate.set(position,calc);}
+
         class ItemViewHolder extends  RecyclerView.ViewHolder{
             private TextView calcText;
             private TextView subText;
@@ -125,9 +128,10 @@ public class TabFragment2 extends Fragment {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int pos = getAdapterPosition() ;
-                        if (pos != RecyclerView.NO_POSITION) {
+                        setPos = getAdapterPosition() ;
+                        if (setPos != RecyclerView.NO_POSITION) {
                             Intent intent = new Intent(getContext(),CalcActivity.class);
+                            Toast.makeText(getContext(),"메모 수정",Toast.LENGTH_SHORT).show();
                             startActivityForResult(intent,2);
                         }
                     }
@@ -142,8 +146,9 @@ public class TabFragment2 extends Fragment {
                         builder.setPositiveButton("예",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        calcList.remove(pos);
+                                        remove(pos);
                                         recyclerView2.setAdapter(recyclerAdapter2);
+                                        Toast.makeText(getContext(),"삭제 완료",Toast.LENGTH_SHORT).show();
                                     }
                                 });
                         builder.setNegativeButton("아니오",

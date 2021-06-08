@@ -31,7 +31,8 @@ public class TabFragment1 extends Fragment {
     RecyclerAdapter recyclerAdapter;
     RecyclerView.LayoutManager mLayoutManger;
     List<Memo> memoList;
-
+    Memo memo;
+    int setPos;
     @Nullable
     @Override
     public  View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,12 +72,19 @@ public class TabFragment1 extends Fragment {
             String strMain = data.getStringExtra("main");
             String strSub = data.getStringExtra("sub");
 
-            Memo memo = new Memo(strMain,strSub);
+            memo = new Memo(strMain,strSub);
 
             recyclerAdapter.addItem(memo);
             recyclerAdapter.notifyDataSetChanged();
         }
+        else if(requestCode == 2){
+            String strMain = data.getStringExtra("main");
+            String strSub = data.getStringExtra("sub");
 
+            memo = new Memo(strMain,strSub);
+            recyclerAdapter.setItem(setPos,memo);
+            recyclerAdapter.notifyDataSetChanged();
+        }
 
     }
 
@@ -116,6 +124,8 @@ public class TabFragment1 extends Fragment {
             listdate.remove(position);
         }
 
+        void setItem(int position,Memo memo){ listdate.set(position,memo);}
+
         class ItemViewHolder extends  RecyclerView.ViewHolder{
 
             private TextView mainText;
@@ -126,6 +136,19 @@ public class TabFragment1 extends Fragment {
                 super(itemView);
                 mainText = itemView.findViewById(R.id.item_maintext);
                 subText = itemView.findViewById(R.id.item_subtext);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setPos = getAdapterPosition() ;
+                        if (setPos != RecyclerView.NO_POSITION) {
+                            Intent intent = new Intent(getContext(),AddActivity.class);
+                            Toast.makeText(getContext(),"메모 수정",Toast.LENGTH_SHORT).show();
+                            startActivityForResult(intent,2);
+                        }
+                    }
+                });
+
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
@@ -136,8 +159,9 @@ public class TabFragment1 extends Fragment {
                         builder.setPositiveButton("예",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        memoList.remove(pos);
+                                        remove(pos);
                                         recyclerView1.setAdapter(recyclerAdapter);
+                                        Toast.makeText(getContext(),"삭제 완료",Toast.LENGTH_SHORT).show();
                                     }
                                 });
                         builder.setNegativeButton("아니오",

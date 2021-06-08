@@ -19,13 +19,6 @@ public class CalcActivity extends AppCompatActivity {
     Button btnDone2,btnNo2;
     TextView diaryDate2;
 
-    int request=2;
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        request = requestCode;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,7 +79,7 @@ public class CalcActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.putExtra("Calc",mainstr);
                     intent.putExtra("sub",substr);
-                    setResult(request,intent);
+                    setResult(0,intent);
                     finish();
                 }
         });
