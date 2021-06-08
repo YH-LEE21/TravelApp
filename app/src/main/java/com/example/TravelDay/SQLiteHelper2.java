@@ -68,7 +68,8 @@ public class SQLiteHelper2 {
 
     public void updateCalc(Calc calc,int position){
         db = opener.getWritableDatabase();
-        db.execSQL("UPDATE "+table2+" SET mainCalc = '"+calc.mainCalc+"' ,subtext = '"+calc.subText+"' WHERE seq = "+ position+";");
+        String sql = "UPDATE "+table2+" SET mainCalc = '"+calc.mainCalc+"' ,subtext = '"+calc.subText+"' WHERE seq = "+ position+";";
+        db.execSQL(sql);
         db.close();
     }
 
