@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 ClipData clipData =ClipData.newPlainText("adress",id);
                 clipboardManager.setPrimaryClip(clipData);
 
-                Toast.makeText(this,"이메일 복사가 완료되었습니다.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"개발자 이메일 복사가 완료되었습니다.",Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return false;

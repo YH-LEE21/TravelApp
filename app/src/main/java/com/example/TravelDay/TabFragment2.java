@@ -67,6 +67,7 @@ public class TabFragment2 extends Fragment {
         if(resultCode == 1) requestCode = 1;
 
         if(requestCode == 0){
+
             String strMain = data.getStringExtra("Calc");
             String strSub = data.getStringExtra("sub");
 
@@ -76,16 +77,19 @@ public class TabFragment2 extends Fragment {
             recyclerAdapter2.notifyDataSetChanged();
 
             dbHelper.insertCalc(calc);//db정보 추가
+            Toast.makeText(getContext(),"경비 작성 완료",Toast.LENGTH_SHORT).show();
 
         }
         else if(requestCode == 2){
             String strMain = data.getStringExtra("Calc");
             String strSub = data.getStringExtra("sub");
+
             calc = new Calc(strMain,strSub);
             recyclerAdapter2.setItem(setPos,calc);
             recyclerAdapter2.notifyDataSetChanged();
-            dbHelper.updateCalc(calc);
 
+            dbHelper.updateCalc(calc);
+            Toast.makeText(getContext(),"수정 완료",Toast.LENGTH_SHORT).show();
         }
 
     }

@@ -78,6 +78,8 @@ public class TabFragment1 extends Fragment {
                 recyclerAdapter.notifyDataSetChanged();
 
                 dbHelper.insertMemo(memo);//db정보 추가
+                Toast.makeText(getContext(),"일정 작성 완료",Toast.LENGTH_SHORT).show();
+
             }
             else if(requestCode == 2) {
 
@@ -89,6 +91,7 @@ public class TabFragment1 extends Fragment {
                 recyclerAdapter.notifyDataSetChanged();
 
                 dbHelper.updateMemo(memo);
+                Toast.makeText(getContext(),"수정 완료",Toast.LENGTH_SHORT).show();
             }
 
 
