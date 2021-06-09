@@ -30,6 +30,7 @@ public class TabFragment2 extends Fragment {
     RecyclerView.LayoutManager yLayoutManger;
     List<Calc> calcList;
     Calc calc;
+
     int setPos;
     @Nullable
     @Override
@@ -59,6 +60,7 @@ public class TabFragment2 extends Fragment {
         return view;
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -71,8 +73,9 @@ public class TabFragment2 extends Fragment {
             calc = new Calc(strMain,strSub);
 
             recyclerAdapter2.addItem(calc);
-            dbHelper.insertCalc(calc);//db정보 추가
             recyclerAdapter2.notifyDataSetChanged();
+
+            dbHelper.insertCalc(calc);//db정보 추가
 
         }
         else if(requestCode == 2){
@@ -81,7 +84,8 @@ public class TabFragment2 extends Fragment {
             calc = new Calc(strMain,strSub);
             recyclerAdapter2.setItem(setPos,calc);
             recyclerAdapter2.notifyDataSetChanged();
-            dbHelper.updateCalc(calc,setPos);
+            dbHelper.updateCalc(calc);
+
         }
 
     }
@@ -106,7 +110,7 @@ public class TabFragment2 extends Fragment {
         public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
             Calc calc = listdate.get(position);
 
-            holder.calcText.setTag(calc.getSeq());
+            holder.calcText.setTag(calc.getSeq());//데이터 베이스
 
             holder.calcText.setText(calc.getMainCalc());
             holder.subText.setText(calc.getSubText());
@@ -130,21 +134,23 @@ public class TabFragment2 extends Fragment {
         class ItemViewHolder extends  RecyclerView.ViewHolder{
             private TextView calcText;
             private TextView subText;
-
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
                 calcText = itemView.findViewById(R.id.item_calcMain);
                 subText = itemView.findViewById(R.id.item_subtext);
-
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        setPos = getAdapterPosition() ;
+                        setPos = getAdapterPosition();//아이템 위치
+
+
+
                         if (setPos != RecyclerView.NO_POSITION) {
                             Intent intent = new Intent(getContext(),CalcActivity.class);
+                            int seq = (int)calcText.getTag();//데이터베이스 위치
                             Toast.makeText(getContext(),"경비 수정",Toast.LENGTH_SHORT).show();
+                            dbHelper.setPos(seq);
                             startActivityForResult(intent,2);
-                            notifyDataSetChanged();
                         }
                     }
                 });

@@ -3,6 +3,8 @@ package com.example.TravelDay;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +25,6 @@ import java.util.List;
 public class TabFragment1 extends Fragment {
 
     SQLiteHelper1 dbHelper;
-
     RecyclerView recyclerView1;
     RecyclerAdapter recyclerAdapter;
     RecyclerView.LayoutManager mLayoutManger;
@@ -79,6 +80,7 @@ public class TabFragment1 extends Fragment {
                 dbHelper.insertMemo(memo);//db정보 추가
             }
             else if(requestCode == 2) {
+
                 String strMain = data.getStringExtra("main");
                 String strSub = data.getStringExtra("sub");
                 memo = new Memo(strMain, strSub);
@@ -86,7 +88,7 @@ public class TabFragment1 extends Fragment {
                 recyclerAdapter.setItem(setPos, memo);
                 recyclerAdapter.notifyDataSetChanged();
 
-                dbHelper.updateMemo(memo,setPos);
+                dbHelper.updateMemo(memo);
             }
 
 
@@ -149,11 +151,10 @@ public class TabFragment1 extends Fragment {
                     @Override
                     public void onClick(View v) {
                         setPos = getAdapterPosition() ;
-                        int seq = (int)mainText.getTag();
                         if (setPos != RecyclerView.NO_POSITION) {
-
                             Intent intent = new Intent(getContext(),AddActivity.class);
-                            intent.putExtra("seq1",seq);
+                            int seq =(int)mainText.getTag();
+                            dbHelper.setPos(seq);
                             Toast.makeText(getContext(),"메모 수정",Toast.LENGTH_SHORT).show();
                             startActivityForResult(intent,2);
                         }

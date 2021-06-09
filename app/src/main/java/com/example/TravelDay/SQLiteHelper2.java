@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -15,7 +16,7 @@ public class SQLiteHelper2 {
     private final  String dbName = "myCalc";
     private static String table2= "CalcTable";
     private final int dbVersion = 1;
-
+    public  int setPOS;
     private SQLiteOpenHelper opener;
     private SQLiteDatabase db;
 
@@ -26,7 +27,9 @@ public class SQLiteHelper2 {
 
     }
 
-
+    public void setPos(int position){
+        this.setPOS = position;
+    }
     private class OpenHelper extends SQLiteOpenHelper{
 
         public OpenHelper(@Nullable Context context,@Nullable String name,@Nullable SQLiteDatabase.CursorFactory factory,int verson){
@@ -59,16 +62,16 @@ public class SQLiteHelper2 {
     }
 
     // DELETE FROM memo table where seq = 0;
-    public void deleteCalc(int position){
+    public void deleteCalc(Integer position){
         db = opener.getWritableDatabase();
         String sql = "DELETE FROM "+table2+" WHERE seq = "+position+";";
         db.execSQL(sql);
         db.close();
     }
 
-    public void updateCalc(Calc calc,int position){
+    public void updateCalc(Calc calc){
         db = opener.getWritableDatabase();
-        String sql = "UPDATE "+table2+" SET mainCalc = '"+calc.mainCalc+"' ,subtext = '"+calc.subText+"' WHERE seq = "+ position+";";
+        String sql ="UPDATE "+table2+" SET mainCalc = '"+calc.mainCalc+"',subtext ='"+calc.subText+"' WHERE seq = "+setPOS+";";
         db.execSQL(sql);
         db.close();
     }

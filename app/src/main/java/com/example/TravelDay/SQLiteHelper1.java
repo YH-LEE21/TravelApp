@@ -1,9 +1,11 @@
 package com.example.TravelDay;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -14,7 +16,7 @@ public class SQLiteHelper1 {
     private final  String dbName = "myMemo";
     private static String table1= "MemoTable";
     private final int dbVersion = 1;
-
+    public int setPOS;
     private SQLiteOpenHelper opener;
     private SQLiteDatabase db;
 
@@ -25,7 +27,9 @@ public class SQLiteHelper1 {
         db = opener.getWritableDatabase();
     }
 
-
+    public void setPos(int position){
+        this.setPOS = position;
+    }
     private class OpenHelper extends SQLiteOpenHelper{
 
         public OpenHelper(@Nullable Context context,@Nullable String name,@Nullable SQLiteDatabase.CursorFactory factory,int verson){
@@ -69,11 +73,22 @@ public class SQLiteHelper1 {
 
     }
 
-    public void updateMemo(Memo memo,int position){
+    public void updateMemo(Memo memo){
         db = opener.getWritableDatabase();
 
-        String sql = "UPDATE "+table1+" SET maintext = '"+memo.maintext+ "',subtext = '"+memo.subText+"' WHERE seq = "+position+";";
+        String sql ="UPDATE "+table1+" SET maintext = '"+memo.maintext+"',subtext ='"+memo.subText+"' WHERE seq = "+setPOS+";";
         db.execSQL(sql);
+//        ContentValues cv = new ContentValues();
+//        cv.put("maintext",memo.maintext);
+//        cv.put("subtext",memo.subText);
+//        long result = db.update(table1,cv,"seq = ?",new String[] {Integer.toString(position)});
+//
+//        if(result == -1){
+//            Toast.makeText(context,"수정 실패",Toast.LENGTH_SHORT).show();
+//        }
+//        else{
+//            Toast.makeText(context,result+" 수정 완료",Toast.LENGTH_SHORT).show();
+//        }
         db.close();
 
     }
